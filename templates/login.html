@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Login</title>
+{% endblock %}
+
+{% block body %}
+
+<!-- navigation bar -->
+<nav class="navbar">
+    <div class="navdiv">
+        <div class="logo"><a href="#">Thrifty's</a></div>
+        <ul>
+            <li><a href="{{ url_for('main.home') }}">Home</a></li>
+            <li><a href="#">Undecided</a></li>
+            <li><a href="#">Undecided</a></li>
+            <button><a href="{{ url_for('auth.login') }}">Log in</a></button>
+            <button><a href="{{ url_for('auth.register') }}">Register</a></button>
+
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <h1>Log in</h1>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+            <div style="color: red;">{{ msg }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form action="{{ url_for('auth.login') }}" method="POST">
+        <label>Email:</label>
+        <input
+        type="text"
+        name="email"
+        placeholder="Email"
+        required
+        />
+
+        <br><br>
+        <label>Password:</label>
+        <input
+        type="text"
+        name="password"
+        placeholder="Password"
+        required
+        />
+        <br><br>
+
+        <button type="submit">Login</button>
+    </form>
+</div>
+{% endblock %}
