@@ -1,0 +1,20 @@
+/* log in and registration */
+
+#authentication{
+    border-radius: 25px;
+    background-color: rgb(182, 216, 182);
+    padding: 40px;
+    width: 200px;
+    height: auto;
+    margin: 0 auto;
+    margin-top: 60px;
+}
+
+#authentication button{
+    display: block;
+    margin: 0 auto;
+}
+
+#authentication h1, #authentication h2{
+    text-align: center;
+}

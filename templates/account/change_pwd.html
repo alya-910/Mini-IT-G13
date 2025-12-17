@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<!-- navigation bar -->
+{% include 'includes/navbar.html' %}
+
+
+
+<div class="container" id="authentication">
+    <h1>Reset Password</h1>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+            <div style="color: white;">{{ msg }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="{{ url_for('account.change_password') }}">
+        <label>Enter your current password:</label>
+        <input
+        type="password"
+        id="password"
+        name="current_password"
+        placeholder="Password"
+        required
+        /><br><br>
+
+        <label>New Password:</label><br>
+        <input
+        type="password"
+        id="password"
+        name="new_password"
+        placeholder="Password"
+        required
+        /><br><br>
+
+        <label>Confirm Password:</label><br>
+        <input
+        type="password"
+        id="password"
+        name="confirm_password"
+        placeholder="Password"
+        required
+        /><br><br>
+        
+        <button type="submit">Reset Password</button>
+    </form>
+</div>
+
+{% endblock %}

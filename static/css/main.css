@@ -1,5 +1,6 @@
 body{
     margin: 0;
+    padding: 0;
     box-sizing: border-box;
     font-family: sans-serif;
 }
@@ -22,7 +23,7 @@ body{
 
 }
 
-.navbar a:hover{
+.navbar a:hover, button:hover{
     background-color: rgb(250, 151, 168);
 }
 

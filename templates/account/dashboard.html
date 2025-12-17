@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<!-- navigation bar -->
+{% include 'includes/navbar.html' %}
+
+<div class="wrapper">
+    <h1>Dashboard</h1>
+    <h3>You are logged in!</h3>
+    <br>
+
+    <div class="user_data">
+        <strong>User ID: </strong>{{ user.id }}<br>
+        <strong>Username: </strong>{{ user.username }}<br>
+        <strong>Email: </strong>{{ user.email }}<br>
+        <strong>Bio: </strong>{{ user.bio or "No bio yet."}}<br>
+
+        <!-- changing profile picture -->
+        {% if user.profile_pic %}
+            <img src="{{ url_for('static', filename='profile_pics/' + user.profile_pic, t=time_now) }}" class="pfp">
+        {% else %}
+            <img src="{{ url_for('static', filename='profile_pics/default.jpg', t=time_now) }}">
+        {% endif %}
+    </div>
+    <br><br>
+
+
+    <div class="update_info">
+        <h3>Update profile:</h3>
+        <hr>
+        
+        <!-- use a form to edit user details -->
+        <form method="POST" enctype="multipart/form-data" action="{{ url_for('account.update_profile') }}">
+            <label>Change username</label>
+            <input name="username" value="{{ user.username }}">
+            <br><br>
+
+            <label>Bio</label>
+            <textarea name="bio">{{ user.bio }}</textarea>
+            <br><br>
+
+            <label>Profile picture</label>
+            <input type="file" name="profile_pic">
+            <br><br>
+
+            <button type="submit">Save Changes</button>
+            <br><br>
+        </form>
+    </div>
+    
+    <button><a href="{{ url_for('account.change_password') }}" class="btn">Change password</a></button>
+    <br><br>
+    <button><a href="{{ url_for('auth.logout') }}" class="btn">Log out</a></button>
+    <button><a href="{{ url_for('account.delete_account') }}" class="btn">Delete account</a></button>
+</div>
+{% endblock %}

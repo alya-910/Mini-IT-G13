@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<body class="confirm_delete">
+    <div class="choice" id="confirm_delete">
+
+        <h2>Are you sure you want to delete your account?</h2>
+        <p>
+            This action is permanent and irreversible.
+        </p>
+
+        <form method="POST" action="{{ url_for('account.delete_account') }}">
+            <button type="submit" name="choice" value="yes">
+                Yes, delete my account.
+            </button>
+            
+            <button type="submit" name="choice" value="no">
+                <a href="{{ url_for('account.dashboard') }}">
+                    No, go back to dashboard.
+                </a>
+            </button>
+        </form>
+
+    </div>
+</body>
+{% endblock %}

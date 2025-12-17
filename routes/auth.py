@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session, flash
 from models.user import User
 from database import db
+from flask_login import login_user, logout_user
 
 auth = Blueprint('auth', __name__)
 
@@ -34,7 +35,7 @@ def register():
         flash("Account created successfully!")
         return redirect(url_for('main.home'))
     
-    return render_template('register.html')
+    return render_template('authentication/register.html')
 
 
 
@@ -47,16 +48,18 @@ def login():
         user = User.query.filter_by(email=email).first()
         
         if user and user.check_password(password):
-            session['user_id'] = user.id
+            login_user(user)
             session['username'] = user.username
+            session['user_id'] = user.id
             return redirect(url_for('main.home'))
         
         flash("Invalid email or password")
         return redirect(url_for('auth.login'))
 
-    return render_template('login.html')
+    return render_template('authentication/login.html')
 
 @auth.route('/logout')
 def logout():
-    session.pop('username', None)
+    session.clear()
+    flash("You have been logged out.")
     return redirect(url_for('main.home'))
