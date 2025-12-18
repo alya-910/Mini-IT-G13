@@ -2,9 +2,6 @@
 
 {% block body %}
 
-<!-- navigation bar -->
-{% include 'includes/navbar.html' %}
-
 <div class="container" id="authentication">
     <h1>Register</h1>
     <h2>Ready to start thrifting? Join now!</h2>
@@ -12,7 +9,7 @@
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             {% for msg in messages %}
-            <div style="color: white;">{{ msg }}</div>
+            <div style="color: rgb(0, 0, 0);">{{ msg }}</div>
             {% endfor %}
         {% endif %}
     {% endwith %}

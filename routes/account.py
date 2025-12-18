@@ -26,7 +26,7 @@ def update_bio():
 @login_required
 def delete_account():
     if request.method == 'GET':
-        return render_template('account/confirm_delete.html')
+        return render_template('account/confirm_delete.html', hide_navbar=True)
 
     choice = request.form.get("choice")
 

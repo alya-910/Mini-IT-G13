@@ -11,6 +11,10 @@
     {% block head %}{% endblock %}
 </head>
 <body>
+    {% if not hide_navbar %}
+        {% include "includes/navbar.html" %}
+    {% endif %}
+
     {% block body %}{% endblock %}
 </body>
 </html>
