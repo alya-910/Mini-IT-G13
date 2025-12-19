@@ -1,20 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/account.css') }}">
-
-    <title>{% block title %}Thriftwise{% endblock %}</title>
-    {% block head %}{% endblock %}
+    <title>{% block title %}Uni Thrift & Trade{% endblock %}</title>
 </head>
 <body>
-    {% if not hide_navbar %}
-        {% include "includes/navbar.html" %}
+<nav>
+    {% if current_user.is_authenticated %}
+        <a href="{{ url_for('view_listings') }}">Marketplace</a> |
+        <a href="{{ url_for('view_messages') }}">Messages</a> |
+        {% if current_user.role == 'admin' %}
+            <a href="{{ url_for('admin_users.manage_users') }}">Admin Users</a> |
+            <a href="{{ url_for('admin_listings.manage_listings') }}">Admin Listings</a> |
+            <a href="{{ url_for('reports.admin_reports') }}">Admin Reports</a> |
+        {% endif %}
+        <a href="{{ url_for('auth.logout') }}">Logout</a>
+    {% else %}
+        <a href="{{ url_for('auth.login') }}">Login</a>
     {% endif %}
+</nav>
+<hr>
 
-    {% block body %}{% endblock %}
+{% with messages = get_flashed_messages(with_categories=True) %}
+  {% if messages %}
+    <ul>
+    {% for category, message in messages %}
+      <li><strong>{{ category }}:</strong> {{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+{% block content %}{% endblock %}
 </body>
 </html>

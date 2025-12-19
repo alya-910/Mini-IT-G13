@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Admin - Reports{% endblock %}
+{% block content %}
+    <h2>Admin Report Dashboard</h2>
+    <table border="1" cellpadding="8">
+        <tr>
+            <th>ID</th>
+            <th>Type</th>
+            <th>Reason</th>
+            <th>Reporter</th>
+            <th>Status</th>
+            <th>Created</th>
+            <th>Details</th>
+        </tr>
+        {% for report in reports %}
+        <tr>
+            <td>{{ report.id }}</td>
+            <td>{{ report.report_type }}</td>
+            <td>{{ report.reason }}</td>
+            <td>{{ report.reporter.name }}</td>
+            <td>{{ report.status }}</td>
+            <td>{{ report.created_at }}</td>
+            <td><a href="{{ url_for('reports.admin_report_detail', report_id=report.id) }}">Review</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

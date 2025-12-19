@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Admin - Listings{% endblock %}
+{% block content %}
+<h2>Listings Management</h2>
+
+<table border="1" cellpadding="8">
+    <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Owner</th>
+        <th>Price</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+    {% for l in listings %}
+    <tr>
+        <td>{{ l.id }}</td>
+        <td>{{ l.title }}</td>
+        <td>{{ l.user.name }}</td>
+        <td>RM {{ l.price }}</td>
+        <td>{{ l.status }}</td>
+        <td>
+            <a href="{{ url_for('admin_listings.toggle_status', listing_id=l.id) }}">
+                {% if l.status == 'active' %}Suspend{% else %}Activate{% endif %}
+            </a>
+            |
+            <a href="{{ url_for('admin_listings.delete_listing', listing_id=l.id) }}" style="color:red">
+                Delete
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

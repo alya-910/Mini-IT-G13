@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Report #{{ report.id }}{% endblock %}
+{% block content %}
+    <h2>Report #{{ report.id }} Details</h2>
+    <p><strong>Type:</strong> {{ report.report_type }}</p>
+    <p><strong>Reason:</strong> {{ report.reason }}</p>
+    <p><strong>Reporter:</strong> {{ report.reporter.name }}</p>
+    {% if report.listing %}
+        <p><strong>Listing:</strong> {{ report.listing.title }} (Owner: {{ report.listing.user.name }})</p>
+    {% endif %}
+    {% if report.message %}
+        <p><strong>Message:</strong> "{{ report.message.content }}"</p>
+        <p><strong>Sender:</strong> {{ report.message.sender.name }}</p>
+    {% endif %}
+    <form method="POST">
+        <label for="action">Action:</label>
+        <select name="action">
+            <option value="no_action">No action needed</option>
+            {% if report.listing %}
+                <option value="suspend_listing">Suspend Listing</option>
+            {% endif %}
+            {% if report.message %}
+                <option value="suspend_sender">Suspend Message Sender</option>
+            {% endif %}
+        </select>
+        <label for="admin_notes">Admin Notes:</label>
+        <textarea name="admin_notes" rows="4" cols="50">{{ report.admin_notes }}</textarea>
+        <button type="submit">Submit Action</button>
+    </form>
+{% endblock %}

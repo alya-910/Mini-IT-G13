@@ -1,47 +1,58 @@
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from database import db
-from flask_login import LoginManager
+from flask import Flask, redirect, url_for, render_template
+from flask_login import login_required, current_user
+from config import Config
+from extensions import db, migrate, login_manager
+from models import User, Listing, Message
+from blueprints.auth import auth_bp
+from blueprints.admin_users import admin_users_bp
+from blueprints.admin_listings import admin_listings_bp
+from blueprints.reports import reports_bp
+# Removed: from werkzeug.urls import url_quote (No longer necessary)
 
-def create_app():
-    app = Flask(__name__)
+app = Flask(__name__)
+app.config.from_object(Config)
 
-    
-    # configure SQL Alchemy
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['SECRET_KEY'] = 'your-secret-key'
-    app.config['UPLOAD_FOLDER'] = 'static/profile_pics'
+db.init_app(app)
+migrate.init_app(app, db)
+login_manager.init_app(app)
 
-    db.init_app(app)
-
-    login_manager = LoginManager()
-    login_manager.init_app(app)
-    login_manager.login_view = 'auth.login'
+login_manager.login_view = "auth.login"
 
 
-    from models.user import User
-    @login_manager.user_loader
-    def load_user(user_id):
-        return User.query.get(int(user_id))
-    
-    # import blueprints
-    from routes.auth import auth
-    from routes.account import account
-    from routes.main import main
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
-    # register bluepints
-    app.register_blueprint(auth)
-    app.register_blueprint(account)
-    app.register_blueprint(main)
 
-    return app
+# Register blueprints
+app.register_blueprint(auth_bp)
+app.register_blueprint(admin_users_bp)
+app.register_blueprint(admin_listings_bp)
+app.register_blueprint(reports_bp)
 
-app = create_app()
-        
 
-if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
+# -------- BASIC USER ROUTES --------
+
+@app.route("/")
+def index():
+    if current_user.is_authenticated:
+        return redirect(url_for("view_listings"))
+    return redirect(url_for("auth.login"))
+
+
+@app.route("/listings")
+@login_required
+def view_listings():
+    listings = Listing.query.all()
+    return render_template("listing_list.html", listings=listings)
+
+
+@app.route("/messages")
+@login_required
+def view_messages():
+    messages = Message.query.all()
+    return render_template("messages.html", messages=messages)
+
+
+if __name__ == "__main__":
     app.run(debug=True)
-
