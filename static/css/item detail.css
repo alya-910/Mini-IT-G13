@@ -1,0 +1,79 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  margin: 0;
+}
+
+.detail-container {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.detail-card {
+  display: flex;
+  gap: 30px;
+  background-color: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.image-section img {
+  width: 400px;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.info-section {
+  flex: 1;
+}
+
+.info-section h1 {
+  margin-top: 0;
+}
+
+.price {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #416039;
+  margin: 10px 0;
+}
+
+.description {
+  color: #555;
+  line-height: 1.6;
+}
+
+.button-row {
+  display: flex;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.btn {
+  padding: 10px 18px;
+  border-radius: 4px;
+  text-decoration: none;
+  color: white;
+  font-size: 0.95rem;
+  border: none;
+  cursor: pointer;
+}
+
+.btn.primary {
+  background-color: #70a562;
+}
+
+.btn.primary:hover {
+  background-color: #1a5bb8;
+}
+
+.btn.danger {
+  background-color: #f68783;
+}
+
+.btn.danger:hover {
+  background-color: #f68783;
+}
