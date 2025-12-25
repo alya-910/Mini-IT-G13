@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/itemdetail.css') }}">
+  <meta charset="utf-8">
+  <title>{{ item.title }} — MiniIT UniThrift</title>
+</head>
+<body>
+
+  <div class="detail-container">
+
+    <div class="detail-card">
+
+      <div class="image-section">
+        <img
+          src="{{ url_for('static', filename=item.image_path) }}"
+          alt="{{ item.title }}"
+        >
+      </div>
+
+      <div class="info-section">
+        <h1>{{ item.title }}</h1>
+
+        <p class="price">RM {{ '%.2f'|format(item.price or 0) }}</p>
+
+        <p class="description">{{ item.description }}</p>
+
+        <div class="button-row">
+          <a href="{{ url_for('edit_item', item_id=item.id) }}" class="btn primary">
+            Edit
+          </a>
+
+          <form
+            action="{{ url_for('delete_item', item_id=item.id) }}"
+            method="post"
+          >
+            <button type="submit" class="btn danger">Delete</button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</body>
+</html>
