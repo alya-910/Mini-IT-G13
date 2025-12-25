@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/marketplace.css') }}">
+  <meta charset="utf-8">
+  <title>MMUThrift</title>
+</head>
+<body>
+
+  <div class="page-container">
+
+    <h1>Marketplace</h1>
+
+    <p>
+      <a class="upload-link" href="{{ url_for('upload_item') }}">
+        Upload new item
+      </a>
+    </p>
+
+    <div class="item-grid">
+      {% for item in items %}
+        <div class="item-card">
+
+          <a href="{{ url_for('item_detail', item_id=item.id) }}">
+            <img
+              src="{{ url_for('static', filename=item.image_path) }}"
+              alt="{{ item.title }}"
+            >
+          </a>
+
+          <h3>
+            <a href="{{ url_for('item_detail', item_id=item.id) }}">
+              {{ item.title }}
+            </a>
+          </h3>
+
+          <p class="price">RM {{ '%.2f'|format(item.price or 0) }}</p>
+
+          <p class="description">{{ item.description }}</p>
+
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+
+</body>
+</html>
+
