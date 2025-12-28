@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cart</title>
+</head>
+<body>
+
+<h1>Your Cart</h1>
+
+{% if cart_items %}
+  <table border="1" cellpadding="10">
+    <tr>
+      <th>Item</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Subtotal</th>
+      <th>Action</th>
+    </tr>
+
+    {% for entry in cart_items %}
+    <tr>
+      <td>{{ entry.item.title }}</td>
+      <td>RM {{ '%.2f'|format(entry.item.price) }}</td>
+      <td>{{ entry.quantity }}</td>
+      <td>RM {{ '%.2f'|format(entry.subtotal) }}</td>
+      <td>
+        <a href="{{ url_for('remove_from_cart', item_id=entry.item.id) }}">
+          Remove
+        </a>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <h3>Total: RM {{ '%.2f'|format(total) }}</h3>
+
+  <form action="{{ url_for('checkout') }}" method="post">
+    <button type="submit">Checkout</button>
+  </form>
+
+{% else %}
+  <p>Your cart is empty.</p>
+{% endif %}
+
+<p><a href="{{ url_for('index') }}">Back to Marketplace</a></p>
+
+</body>
+</html>

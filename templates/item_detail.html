@@ -25,6 +25,10 @@
 
         <p class="description">{{ item.description }}</p>
 
+        <form action="{{ url_for('add_to_cart', item_id=item.id) }}" method="get">
+  <button type="submit">Add to Cart</button>
+</form>
+
         <div class="button-row">
           <a href="{{ url_for('edit_item', item_id=item.id) }}" class="btn primary">
             Edit
