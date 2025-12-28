@@ -1,0 +1,17 @@
+.success-box {
+  background-color: white;
+  padding: 40px;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+
+.success-box h1 {
+  color: #28a745;
+}
+
+.success-box a {
+  display: inline-block;
+  margin-top: 20px;
+  font-weight: bold;
+}

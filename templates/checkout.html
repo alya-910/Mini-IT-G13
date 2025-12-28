@@ -2,15 +2,17 @@
 <html>
 <head>
   <title>Checkout Complete</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
 </head>
 <body>
-
-<h1>Checkout Successful 🎉</h1>
-
-<p>Your purchase / trade has been confirmed.</p>
-<p>Your cart has been cleared.</p>
-
-<a href="{{ url_for('index') }}">Return to Marketplace</a>
+3
+<div class="container">
+  <div class="success-box">
+    <h1>Checkout Successful 🎉</h1>
+    <p>Your purchase / trade has been confirmed.</p>
+    <a href="{{ url_for('index') }}">Return to Marketplace</a>
+  </div>
+</div>
 
 </body>
 </html>
