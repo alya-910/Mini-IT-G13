@@ -1,6 +1,9 @@
-from app import app
+from app import create_app          # CHANGE 1: Import the function
 from extensions import db
 from models import User, Listing, Message
+
+# CHANGE 2: Create the app instance manually
+app = create_app()
 
 with app.app_context():
     print("Dropping old database...")
