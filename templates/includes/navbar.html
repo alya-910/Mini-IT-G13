@@ -1,15 +1,17 @@
 <nav class="navbar">
     <div class="navdiv">
-        <div class="logo"><a href="#">Thriftwise</a></div>
+        <div class="logo"><a href="#">Thriftwize</a></div>
         <ul>
             <li><a href="{{ url_for('main.home') }}">Home</a></li>
             <li><a href="{{ url_for('account.dashboard') }}">Dashboard</a></li>
             <li><a href="#">Undecided</a></li>
-            {% if 'username' in session %}
-            <button><a href="{{ url_for('auth.logout') }}">Log out</a></button>
-            {% else %}
-            <button><a href="{{ url_for('auth.login') }}">Log in</a></button>
-            {% endif %}
+
+        {% if current_user.is_authenticated %}
+            <li><a href="{{ url_for('notifications.list_notifications') }}">Notifications</li>
+            <li><a href="{{ url_for('auth.logout') }}">Log out</a></li>
+        {% else %}
+            <li><a href="{{ url_for('auth.login') }}">Log in</a></li>
+        {% endif %}
         </ul>
     </div>
 </nav>

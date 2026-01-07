@@ -2,6 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from database import db
 from flask_login import LoginManager
+from extensions import mail
 
 def create_app():
     app = Flask(__name__)
@@ -10,10 +11,19 @@ def create_app():
     # configure SQL Alchemy
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['SECRET_KEY'] = 'your-secret-key'
+    app.config['SECRET_KEY'] = 'mmu-thriftwize'
     app.config['UPLOAD_FOLDER'] = 'static/profile_pics'
 
+    # email configuration
+    app.config['MAIL_SERVER'] = 'sandbox.smtp.mailtrap.io'
+    app.config['MAIL_PORT'] = 587
+    app.config['MAIL_USE_TLS'] = True
+    app.config['MAIL_USERNAME'] = '36df090f947a3e'
+    app.config['MAIL_PASSWORD'] = '50704eb8222b6e'
+    app.config['MAIL_DEFAULT_SENDER'] = 'no-reply@thriftwize.com'
+
     db.init_app(app)
+    mail.init_app(app)
 
     login_manager = LoginManager()
     login_manager.init_app(app)
