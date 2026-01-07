@@ -61,7 +61,7 @@ body {
 
 .button-row button {
   flex: 1;
-  background: linear-gradient(135deg, #28a745, #218838);
+  background-color: #3e7d4cfa;
   color: white;
   border: none;
   padding: 12px;

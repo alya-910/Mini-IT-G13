@@ -129,12 +129,13 @@ def delete_item(item_id):
 # Add to cart
 @app.route("/add_to_cart/<int:item_id>")
 def add_to_cart(item_id):
-    cart = session.get("cart", {})  # get existing cart or empty
+    cart = session.get("cart", {})
     item_id_str = str(item_id)
-    if item_id_str in cart:
-        cart[item_id_str] += 1
-    else:
+
+    # Only add if not already in wishlist
+    if item_id_str not in cart:
         cart[item_id_str] = 1
+
     session["cart"] = cart
     return redirect(url_for("item_detail", item_id=item_id))
 
@@ -150,12 +151,6 @@ def view_cart():
             items.append((item, qty))
             total += (item.price or 0) * qty
     return render_template("cart.html", items=items, total=total)
-
-# Checkout
-@app.route("/checkout", methods=["POST"])
-def checkout():
-    session.pop("cart", None)  # clear cart
-    return render_template("checkout.html")
 
 # Remove from cart
 @app.route("/remove_from_cart/<int:item_id>")

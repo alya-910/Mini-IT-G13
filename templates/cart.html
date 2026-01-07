@@ -1,14 +1,16 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/cart.css') }}">
 
 <div class="container">
-  <h1>Your Cart</h1>
+  <a href="{{ url_for('index') }}" class="cart-button back-button">
+   Back
+</a>
+  <h1>Your Wishlist</h1>
 
   {% if items %}
   <table class="cart-table">
     <tr>
       <th>Item</th>
       <th>Price</th>
-      <th>Qty</th>
       <th>Action</th>
     </tr>
 
@@ -16,7 +18,6 @@
     <tr>
       <td>{{ item.title }}</td>
       <td>RM {{ '%.2f'|format(item.price) }}</td>
-      <td>{{ qty }}</td>
       <td>
         <a class="remove-link" href="{{ url_for('remove_from_cart', item_id=item.id) }}">
           Remove
@@ -26,15 +27,12 @@
     {% endfor %}
   </table>
 
-  <div class="cart-actions">
-    <strong>Total: RM {{ '%.2f'|format(total) }}</strong>
-
-    <form action="{{ url_for('checkout') }}" method="post">
-      <button class="checkout-btn">Checkout</button>
-    </form>
-  </div>
+  <p class="wishlist-note">
+  Items in your wishlist are saved for reference. 
+  Contact the seller to purchase an item.
+</p>
 
   {% else %}
-    <p>Your cart is empty.</p>
+    <p>Your Wishlist is empty.</p>
   {% endif %}
 </div>
