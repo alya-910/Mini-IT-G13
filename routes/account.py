@@ -1,8 +1,10 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session, flash
-from flask_login import login_required, logout_user
+from flask_login import login_required, logout_user, current_user
 from models.user import User
 from database import db
 import uuid, os, time
+from extensions import mail
+from flask_mail import Message
 
 account = Blueprint('account', __name__)
 
@@ -50,16 +52,12 @@ def update_profile():
     # check if anythinf has been updated
     if request.method == 'POST':
         new_username = request.form.get("username")
-        new_password = request.form.get("password_hash")
         new_bio = request.form.get("bio")
         new_profile_pic = request.files.get("profile_pic")
     
         # only update items with changes
         if new_username:
             user.username = new_username
-        
-        if new_password:
-            user.password_hash = new_password
 
         if new_bio:
             user.bio = new_bio
@@ -100,8 +98,25 @@ def change_password():
 
         user.set_password(new_pw)
         db.session.commit()
+        pwd_change_mail(user)
         
         flash("Password changed successfully.")
         return redirect(url_for('account.dashboard'))
 
     return render_template("account/change_pwd.html")
+
+# password change email
+def pwd_change_mail(user):
+        msg = Message('Password change', recipients=[user.email])
+        msg.body=f''' Hello {current_user.username},
+
+        Your Thriftwize password has been changed successfully!
+
+        If you did not request this, please click the link below to reset your password:
+
+        {url_for('auth.forgot_password', _external=True)}
+
+        If this wasn’t you, please secure your account immediately.
+
+        '''
+        mail.send(msg)
