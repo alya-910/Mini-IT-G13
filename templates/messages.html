@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Your Messages</h2>
+
+    {% if messages %}
+        <div class="list-group">
+            {% for message in messages %}
+                <div class="list-group-item">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">
+                            From: {{ message.sender.name if message.sender else 'Unknown' }}
+                        </h5>
+                        <small class="text-muted">{{ message.timestamp }}</small>
+                    </div>
+                    <p class="mb-1">{{ message.content }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info">
+            You have no messages yet.
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

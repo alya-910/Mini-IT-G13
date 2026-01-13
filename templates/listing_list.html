@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Marketplace{% endblock %}
+{% block content %}
+<h2>Marketplace Listings</h2>
+
+<table border="1" cellpadding="8">
+    <tr>
+        <th>Title</th>
+        <th>Owner</th>
+        <th>Price</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+    {% for l in listings %}
+    <tr>
+        <td>{{ l.title }}</td>
+        <td>{{ l.user.name }}</td>
+        <td>RM {{ l.price }}</td>
+        <td>{{ l.status }}</td>
+        <td>
+            {% if l.status == 'active' %}
+                <a href="{{ url_for('reports.report_listing', listing_id=l.id) }}">Report listing</a>
+            {% else %}
+                (suspended)
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
