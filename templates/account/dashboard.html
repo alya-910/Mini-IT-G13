@@ -3,7 +3,7 @@
 {% block body %}
 
 <div class="wrapper">
-    <h1>Dashboard</h1>
+    <h2>Dashboard</h2>
     <h3>You are logged in!</h3>
     <br>
 
@@ -19,6 +19,9 @@
         {% else %}
             <img src="{{ url_for('static', filename='profile_pics/default.jpg', t=time_now) }}">
         {% endif %}
+
+        <p><a href="{{ url_for('user.user_list', user_id=user.id) }}">View users</a></p>
+
     </div>
     <br><br>
 
