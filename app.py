@@ -1,5 +1,4 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 from database import db
 from flask_login import LoginManager
 from extensions import mail
@@ -39,11 +38,17 @@ def create_app():
     from routes.auth import auth
     from routes.account import account
     from routes.main import main
+    from routes.messages import messages
+    from routes.notifications import notifications
+    from routes.users import users
 
     # register bluepints
     app.register_blueprint(auth)
     app.register_blueprint(account)
     app.register_blueprint(main)
+    app.register_blueprint(messages)
+    app.register_blueprint(notifications)
+    app.register_blueprint(users)
 
     return app
 

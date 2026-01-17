@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block body %}
+
+<div class="container">
+    <h2>Inbox</h2>
+
+    {% if messages %}
+        <ul class="message-list">
+            {% for msg in messages %}
+                <li class="message-item">
+                    <strong>From:</strong> {{ msg.sender.username }} <br>
+                    <p>{{ msg.body }}</p>
+                    <small>{{ msg.timestamp.strftime('%Y-%m-%d %H:%M') }}</small>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No messages yet.</p>
+    {% endif %}
+</div>
+{% endblock %}

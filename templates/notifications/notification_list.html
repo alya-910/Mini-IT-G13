@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block body %}
+
+<div class="container">
+    <h2>Notifications</h2>
+
+    {% if notifs %}
+        <ul class="notification-list">
+            {% for notif in notifs %}
+                <li class="{% if not notif.is_read %}unread{% endif %}">
+                    <a href="{{ url_for('notifications.mark_as_read', id=notif.id) }}">
+                        {{ notif.message }}
+                    </a>
+                    <br>
+                    <small>{{ notif.created_at.strftime('%d-%m-%Y %H:%M') }}</small>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No notifications.</p>
+    {% endif %}
+</div>
+
+{% endblock %}

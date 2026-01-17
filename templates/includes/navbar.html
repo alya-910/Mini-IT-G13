@@ -1,10 +1,10 @@
 <nav class="navbar">
     <div class="navdiv">
-        <div class="logo"><a href="#">Thriftwize</a></div>
+        <div class="logo"><a href="#">t h r i f t w i z e</a></div>
         <ul>
             <li><a href="{{ url_for('main.home') }}">Home</a></li>
             <li><a href="{{ url_for('account.dashboard') }}">Dashboard</a></li>
-            <li><a href="#">Undecided</a></li>
+            <li><a href="{{ url_for('user.user_list') }}">Users</a></li>
 
         {% if current_user.is_authenticated %}
             <li><a href="{{ url_for('notifications.list_notifications') }}">Notifications</li>

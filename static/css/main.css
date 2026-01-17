@@ -3,6 +3,9 @@ body{
     padding: 0;
     box-sizing: border-box;
     font-family: sans-serif;
+    height: 100vh;
+    flex-direction: column;
+    display: flex;
 }
 
 .container{
@@ -20,7 +23,7 @@ body{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     padding-left: 15px;
     padding-right: 15px;
-
+    flex-shrink: 0;
 }
 
 .navbar a:hover, button:hover{
@@ -34,7 +37,7 @@ body{
 }
 
 .logo a{
-    font-size: 35px;
+    font-size: 30px;
     font-weight: 600;
     color: black;
 }
