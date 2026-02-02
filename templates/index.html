@@ -1,23 +1,18 @@
-<!doctype html>
-<html>
-<head>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/marketplace.css') }}">
-  <meta charset="utf-8">
-  <title>MMUThrift</title>
-</head>
-<body>
-  <div class="top-bar"><a href="{{ url_for('view_cart') }}" class="cart-button">
+{% extends 'base.html' %}
+
+{% block body %}
+
+  <div class="top-bar"><a href="{{ url_for('cart.view_cart') }}" class="cart-button">
   My Wishlist
-</a>
+  </a>
   </div>
 
   <div class="page-container">
 
-    <h1>Marketplace</h1>
+    <h1>m a r k e t p l a c e</h1>
 
     <p>
-      <a class="upload-link" href="{{ url_for('upload_item') }}">
+      <a class="upload-link" href="{{ url_for('item.upload_item') }}">
         Upload new item
       </a>
     </p>
@@ -26,7 +21,7 @@
       {% for item in items %}
         <div class="item-card">
 
-          <a href="{{ url_for('item_detail', item_id=item.id) }}">
+          <a href="{{ url_for('item.item_detail', item_id=item.id) }}" width="200">
             <img
               src="{{ url_for('static', filename=item.image_path) }}"
               alt="{{ item.title }}"
@@ -34,7 +29,7 @@
           </a>
 
           <h3>
-            <a href="{{ url_for('item_detail', item_id=item.id) }}">
+            <a href="{{ url_for('item.item_detail', item_id=item.id) }}">
               {{ item.title }}
             </a>
           </h3>
@@ -48,6 +43,6 @@
     </div>
 
   </div>
-</body>
-</html>
+{% endblock %}
+
 
