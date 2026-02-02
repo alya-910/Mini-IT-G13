@@ -4,10 +4,13 @@
     border-radius: 25px;
     background-color: rgb(182, 216, 182);
     padding: 40px;
-    width: 200px;
+    width: 300px;
     height: auto;
     margin: 0 auto;
     margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
 #authentication button{
@@ -15,6 +18,32 @@
     margin: 0 auto;
 }
 
+.auth-btn {
+    padding: 10px 18px;
+    background-color: rgb(231, 143, 158);
+    color: white;
+    border-radius: 6px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 15px;
+}
+
+.auth-btn:hover {
+  background-color: rgb(233, 140, 156);
+  transform: translateY(-2px);
+}
+
+
 #authentication h1, #authentication h2{
     text-align: center;
+}
+
+input[type="email"], input[type="password"], #authentication input[type="text"] {
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
 }

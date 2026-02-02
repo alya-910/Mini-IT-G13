@@ -13,10 +13,10 @@
         {% endif %}
     {% endwith %}
 
-    <form action="{{ url_for('auth.login') }}" method="POST">
+    <form action="{{ url_for('auth_user.login') }}" method="POST">
         <label>Email:</label>
         <input
-        type="text"
+        type="email"
         name="email"
         placeholder="Email"
         required
@@ -33,13 +33,13 @@
         />
         <br><br>
 
-        <a href="{{ url_for('auth.forgot_password') }}">Forgot Password?</a>
+        <a href="{{ url_for('auth_user.logout') }}">Forgot Password?</a>
         <br><br>
 
-        <button type="submit">Login</button>
+        <button type="submit" class="auth-btn">Login</button>
         <br>
 
-        <p>Don't have an account yet? <a href="{{ url_for('auth.register') }}">Register now!</a></p>
+        <p>Don't have an account yet? <a href="{{ url_for('auth_user.register') }}">Register now!</a></p>
         
     </form>
 </div>

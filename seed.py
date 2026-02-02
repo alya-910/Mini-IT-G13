@@ -1,6 +1,8 @@
 from app import create_app
 from extensions import db
-from models import User, Listing, Message, Report
+from models.listing import Listing
+from models.message import Message
+from models.user import User
 
 app = create_app()
 
@@ -14,15 +16,15 @@ with app.app_context():
     print("Creating users...")
     
     # Admin (You)
-    admin = User(name="Admin", email="admin@gmail.com", role="admin", status="active")
+    admin = User(username="Admin123", name="Admin", email="admin@gmail.com", role="admin", status="active")
     admin.set_password("admin123")
 
     # Teammate 1: Siti Hawark
-    user_siti = User(name="Siti Hawark", email="sitihawark@gmail.com", role="user", status="active")
+    user_siti = User(username="Siti123", name="Siti Hawark", email="sitihawark@gmail.com", role="user", status="active")
     user_siti.set_password("password123")
 
     # Teammate 2: Alya
-    user_alya = User(name="Alya", email="alya@gmail.com", role="user", status="active")
+    user_alya = User(username="Alya123", name="Alya", email="alyahanisa@gmail.com", role="user", status="active")
     user_alya.set_password("password123")
 
     db.session.add_all([admin, user_siti, user_alya])

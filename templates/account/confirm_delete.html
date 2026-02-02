@@ -10,15 +10,13 @@
         </p>
 
         <form method="POST" action="{{ url_for('account.delete_account') }}">
-            <button type="submit" name="choice" value="yes">
+            <button type="submit" name="choice" value="yes" class="submit-btn">
                 Yes, delete my account.
             </button>
             
-            <button type="submit" name="choice" value="no">
-                <a href="{{ url_for('account.dashboard') }}">
-                    No, go back to dashboard.
-                </a>
-            </button>
+            <a href="{{ url_for('account.dashboard') }}" class="btn1">
+                No, go back to dashboard.
+            </a>
         </form>
 
     </div>

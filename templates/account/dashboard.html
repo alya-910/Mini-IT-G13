@@ -25,7 +25,7 @@
 
     <div class="update_info">
         <h3>Update profile:</h3>
-        <hr>
+        <hr> <br>
         
         <!-- use a form to edit user details -->
         <form method="POST" enctype="multipart/form-data" action="{{ url_for('account.update_profile') }}">
@@ -33,22 +33,27 @@
             <input name="username" value="{{ user.username }}">
             <br><br>
 
-            <label>Bio</label>
-            <textarea name="bio">{{ user.bio }}</textarea>
-            <br><br>
-
             <label>Profile picture</label>
             <input type="file" name="profile_pic">
             <br><br>
 
-            <button type="submit">Save Changes</button>
+            <label>Bio</label>
+            <textarea name="bio">{{ user.bio }}</textarea>
             <br><br>
+
+            <div class="center-btn">
+                <button type="submit" class="submit-btn">Save Changes</button>
+            </div>
         </form>
     </div>
-    
-    <button><a href="{{ url_for('account.change_password') }}" class="btn">Change password</a></button>
     <br><br>
-    <button><a href="{{ url_for('auth.logout') }}" class="btn">Log out</a></button>
-    <button><a href="{{ url_for('account.delete_account') }}" class="btn">Delete account</a></button>
+    
+    <div>
+        <h3>Other options: </h3><hr> <br>
+        <a href="{{ url_for('auth_user.logout') }}" class="btn1">Log out</a>
+        <a href="{{ url_for('account.change_password') }}" class="btn1">Change password</a>
+        <br><br>
+        <a href="{{ url_for('account.delete_account') }}" class="delete-btn">Delete account</a>
+    </div>
 </div>
 {% endblock %}

@@ -33,12 +33,19 @@
 }
 
 .user_data{
-    background: rgb(182, 216, 182);
+    background: rgb(188, 216, 182);
     width: 90%;
     padding: 30px;
     border-radius: 15px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    
+}
+
+.update_info {
+    background: rgb(226, 225, 225);
+    width: 90%;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
 img{
@@ -49,13 +56,95 @@ img{
     margin-left: auto;
 }
 
-.wrapper {
-    width: 100%;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
+/* settings for user profile */
+.user-wrapper {
+    display: flex;
+    align-items: center;
+    border-radius: 25px;
+    background-color: rgb(241, 186, 209);
     padding: 20px;
-    background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    gap: 20px;
+    text-align: left;
+    margin: 0 0 20px 0;
+}
+
+.list-pfp {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    margin-left: 0;
+}
+
+.list-data {
+    text-align: left;
+}
+
+.users-container {
+    width: 100%;
+    text-align: left;
+}
+
+.btn1 {
+    padding: 10px 18px;
+    background-color: rgb(231, 143, 158);
+    color: white;
+    border-radius: 6px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 15px;
+}
+
+.btn1:hover {
+  background-color: rgb(233, 140, 156);
+  transform: translateY(-2px);
+}
+
+.submit-btn {
+    padding: 10px 18px;
+    background-color: rgb(101, 129, 101);
+    color: white;
+    border-radius: 6px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 15px;
+}
+
+.submit-btn:hover {
+    background-color: rgb(128, 163, 128);
+    transform: translateY(-2px); 
+}
+
+.center-btn {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.delete-btn {
+    padding: 10px 18px;
+    background-color: rgb(226, 47, 47);
+    color: white;
+    border-radius: 6px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 15px;
+}
+
+.delete-btn:hover {
+  background-color: rgb(226, 47, 47);
+  transform: translateY(-2px);
 }
