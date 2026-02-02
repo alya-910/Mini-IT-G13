@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for
 from flask_login import login_required, current_user
 from extensions import db
-from models import Listing
+from models.listing import Listing
 
 admin_listings_bp = Blueprint("admin_listings", __name__, url_prefix="/admin/listings")
 
