@@ -1,14 +1,17 @@
-from flask import Flask, redirect, url_for, render_template
-from flask_login import login_required, current_user
+from flask import Flask
 from config import Config
 from extensions import db, migrate, login_manager
-from models import User, Listing, Message
+from extensions import mail
 
 # Import your blueprints
-from blueprints.auth import auth_bp
 from blueprints.admin_users import admin_users_bp
 from blueprints.admin_listings import admin_listings_bp
 from blueprints.reports import reports_bp
+from blueprints.auth_user import auth
+from blueprints.account import account
+from blueprints.main import main
+from blueprints.item_listing import item
+from blueprints.cart import cart
 
 def create_app():
     # 1. Initialize the App
@@ -19,43 +22,38 @@ def create_app():
     db.init_app(app)
     migrate.init_app(app, db)
     login_manager.init_app(app)
+    mail.init_app(app)
 
     # 3. Configure Login Manager
-    login_manager.login_view = "auth.login"
+    login_manager.init_app(app)
+    login_manager.login_view = "auth_user.login"
 
+    from models.user import User
     @login_manager.user_loader
     def load_user(user_id):
         return User.query.get(int(user_id))
 
     # 4. Register Blueprints
-    app.register_blueprint(auth_bp)
+    # app.register_blueprint(auth_bp)
     app.register_blueprint(admin_users_bp)
     app.register_blueprint(admin_listings_bp)
     app.register_blueprint(reports_bp)
 
-    # 5. Define Basic Routes directly on the app instance
-    @app.route("/")
-    def index():
-        if current_user.is_authenticated:
-            return redirect(url_for("view_listings"))
-        return redirect(url_for("auth.login"))
+    # alya's code
+    app.register_blueprint(auth, url_prefix="/auth")
+    app.register_blueprint(account, url_prefix="/account")
+    app.register_blueprint(main)
 
-    @app.route("/listings")
-    @login_required
-    def view_listings():
-        listings = Listing.query.all()
-        return render_template("listing_list.html", listings=listings)
-
-    @app.route("/messages")
-    @login_required
-    def view_messages():
-        # Get messages where the current user is the receiver
-        messages = Message.query.filter_by(receiver_id=current_user.id).all()
-        return render_template("messages.html", messages=messages)
+    # siti's code
+    app.register_blueprint(item)
+    app.register_blueprint(cart)
 
     return app
 
+app = create_app()
+
 # Only run if executed directly
 if __name__ == "__main__":
-    app = create_app()
+    with app.app_context():
+        db.create_all()  # create tables if not exist
     app.run(debug=True)
