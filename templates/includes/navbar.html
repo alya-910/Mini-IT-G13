@@ -1,15 +1,31 @@
-<nav class="navbar">
+<ul class="navbar">
     <div class="navdiv">
-        <div class="logo"><a href="#">Thriftwise</a></div>
-        <ul>
-            <li><a href="{{ url_for('main.home') }}">Home</a></li>
-            <li><a href="{{ url_for('account.dashboard') }}">Dashboard</a></li>
-            <li><a href="#">Undecided</a></li>
-            {% if 'username' in session %}
-            <button><a href="{{ url_for('auth.logout') }}">Log out</a></button>
-            {% else %}
-            <button><a href="{{ url_for('auth.login') }}">Log in</a></button>
-            {% endif %}
-        </ul>
+        <div class="logo nav-left"><a href="{{ url_for('main.index') }}">t h r i f t w i z e</a></div>
+        <div class="nav-right">
+        <li><a href="{{ url_for('main.index') }}">Home</a></li>
+        <li>
+            <a>Account ▼</a>
+            <ul class="dropdown">
+                <li><a href="{{ url_for('account.dashboard') }}">Dashboard</a></li>
+                <li><a href="#">Undecided</a></li>
+            </ul>
+        </li>
+        {% if current_user.role == 'admin' %}
+        <li>
+            <a>Admin ▼</a>
+            <ul class="dropdown">
+                <li><a href="{{ url_for('admin_users.manage_users') }}">Admin Users</a></li>
+                <li><a href="{{ url_for('admin_listings.manage_listings') }}">Admin Listings</a></li>
+                <li><a href="{{ url_for('reports.admin_reports') }}">Admin Reports</a></li>
+            </ul>
+        </li>
+        {% endif %}
+
+        {% if current_user.is_authenticated %}
+            <li><a href="{{ url_for('auth_user.logout') }}" class="btn1">Log out</a></li>
+        {% else %}
+            <li><a href="{{ url_for('auth_user.login') }}" class="btn1">Log in</a></li>
+        {% endif %}
+        </div>
     </div>
-</nav>
+</ul>
