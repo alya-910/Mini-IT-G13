@@ -13,6 +13,7 @@ def dashboard():
     user = User.query.get(session['user_id'])
     return render_template('account/dashboard.html', user=user, time_now=int(time.time()))
 
+# update bio
 @account.route('/update_bio', methods=['POST'])
 @login_required
 def update_bio():
@@ -21,7 +22,7 @@ def update_bio():
     flash("Bio updated!")
     return redirect(url_for('account.dashboard'))
 
-
+# delete account
 @account.route('/delete_account', methods=['GET', 'POST'])
 @login_required
 def delete_account():
@@ -40,6 +41,7 @@ def delete_account():
     
     return redirect(url_for('account.dashboard'))
 
+# update profile
 @account.route('/update_profile', methods=['GET', 'POST'])
 @login_required
 def update_profile():
@@ -73,6 +75,7 @@ def update_profile():
 
     return redirect(url_for('account.dashboard'))
 
+# change password
 @account.route('/change_password', methods=["GET", "POST"])
 @login_required
 def change_password():

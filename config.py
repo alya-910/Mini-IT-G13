@@ -11,5 +11,5 @@ class Config:
     MAIL_PORT = 587
     MAIL_USE_TLS = True
     MAIL_USERNAME = '36df090f947a3e'
-    MAIL_PASSWORD = '50704eb8222be'
+    MAIL_PASSWORD = '50704eb8222b6e'
     MAIL_DEFAULT_SENDER = 'no-reply@thriftwize.com'

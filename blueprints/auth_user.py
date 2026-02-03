@@ -1,7 +1,9 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session, flash
 from models.user import User
 from extensions import db
-from flask_login import login_user, logout_user
+from flask_login import login_user
+from extensions import mail
+from flask_mail import Message
 
 auth = Blueprint('auth_user', __name__)
 
@@ -58,8 +60,66 @@ def login():
 
     return render_template('authentication/login.html')
 
+# user log out
 @auth.route('/logout')
 def logout():
     session.clear()
     flash("You have been logged out.")
     return redirect(url_for('main.index'))
+
+# forgot password
+def send_mail(user):
+    token = user.get_reset_token()
+    msg = Message('Password reset request', recipients=[user.email])
+    msg.body=f''' Click the link below to reset your password.
+
+    {url_for('auth_user.reset_token', token=token, _external=True)}
+
+    If you did not request this, please ignore this message.
+
+    '''
+    mail.send(msg)
+
+@auth.route('/forgot_password', methods=['GET', 'POST'])
+def forgot_password():
+    if request.method == 'POST':
+        email = request.form['email']
+        user = User.query.filter_by(email=email).first()
+
+        if user:
+            send_mail(user)
+            flash("Reset request sent. Check your email.")
+            return redirect(url_for('auth_user.login'))
+        
+        else:
+            flash("Invalid email. Please re-enter your email.")
+
+    return render_template('authentication/forgot_password.html')
+
+@auth.route('/reset_password/<token>', methods=['GET', 'POST'])
+def reset_token(token):
+    user=User.verify_reset_token(token)
+
+    if user is None:
+        flash('The link is invalid or expired. Please retry')
+        return redirect(url_for('auth_user.forgot_password'))
+    
+    if request.method == "POST":
+        new_pw = request.form.get("new_password")
+        confirm_pw = request.form.get("confirm_password")
+
+        if len(new_pw) < 6:
+            flash("Password needs to be at least 6 characters")
+            return redirect(url_for('auth_user.reset_password'))
+        
+        if new_pw != confirm_pw:
+            flash("New password and confirmation password do not match")
+            return redirect(url_for('auth_user.reset_password'))
+
+        user.set_password(new_pw)
+        db.session.commit()
+        
+        flash("Password reset successfully. Please login.")
+        return redirect(url_for('auth_user.login'))
+    
+    return render_template('authentication/reset_password.html', token=token)
