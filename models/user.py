@@ -17,6 +17,18 @@ class User(db.Model, UserMixin):
     role = db.Column(db.String(50), default='user')
     status = db.Column(db.String(50), default='active')
 
+    sent_messages = db.relationship(
+    'ChatMessage',
+    foreign_keys='ChatMessage.sender_id',
+    back_populates='sender'
+)
+
+    received_messages = db.relationship(
+        'ChatMessage',
+        foreign_keys='ChatMessage.receiver_id',
+        back_populates='receiver'
+    )
+
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
 

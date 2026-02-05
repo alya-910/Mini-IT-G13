@@ -1,7 +1,7 @@
-from database import db
+from extensions import db
 from datetime import datetime
 
-class Message(db.Model):
+class ChatMessage(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     sender_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     receiver_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
@@ -12,11 +12,11 @@ class Message(db.Model):
     sender = db.relationship(
         'User',
         foreign_keys=[sender_id],
-        backref='sent_messages'
+        back_populates='sent_messages'
     )
 
     receiver = db.relationship(
         'User',
         foreign_keys=[receiver_id],
-        backref='received_messages'
+        back_populates='received_messages'
     )
