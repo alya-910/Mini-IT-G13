@@ -10,6 +10,9 @@ from blueprints.reports import reports_bp
 from blueprints.auth_user import auth
 from blueprints.account import account
 from blueprints.main import main
+from blueprints.messages import messages
+from blueprints.notifications import notifications
+from blueprints.users import users
 from blueprints.item_listing import item
 from blueprints.cart import cart
 
@@ -36,9 +39,7 @@ def create_app():
     # 4. Register Blueprints
     # app.register_blueprint(auth_bp)
     app.register_blueprint(admin_users_bp)
-    app.register_blueprint(admin_listings_bp)    from routes.messages import messages
-    from routes.notifications import notifications
-    from routes.users import users
+    app.register_blueprint(admin_listings_bp)
 
     app.register_blueprint(reports_bp)
 
@@ -46,9 +47,9 @@ def create_app():
     app.register_blueprint(auth, url_prefix="/auth")
     app.register_blueprint(account, url_prefix="/account")
     app.register_blueprint(main)
-    app.register_blueprint(messages)
-    app.register_blueprint(notifications)
-    app.register_blueprint(users)
+    app.register_blueprint(messages, url_prefix="/messages")
+    app.register_blueprint(notifications, url_prefix="/notifications")
+    app.register_blueprint(users, url_prefix="/profile")
 
     # siti's code
     app.register_blueprint(item)

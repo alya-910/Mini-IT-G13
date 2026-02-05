@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, session
 from flask_login import login_required, current_user
 from models.items import Item
 from models.listing import Listing
-from models.message import Message
+from models.message_model import ChatMessage
 
 main = Blueprint('main', __name__)
 
@@ -22,5 +22,5 @@ def view_listings():
 @login_required
 def view_messages():
     # Get messages where the current user is the receiver
-    messages = Message.query.filter_by(receiver_id=current_user.id).all()
+    messages = ChatMessage.query.filter_by(receiver_id=current_user.id).all()
     return render_template("messages.html", messages=messages)

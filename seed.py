@@ -1,7 +1,7 @@
 from app import create_app
 from extensions import db
 from models.listing import Listing
-from models.message import Message
+from models.message_model import ChatMessage
 from models.user import User
 
 app = create_app()
@@ -62,14 +62,14 @@ with app.app_context():
 
     # --- 3. Create Messages ---
     print("Creating messages...")
-    msg1 = Message(
-        content="Hi Siti, is the hoodie still available?",
+    msg1 = ChatMessage(
+        body="Hi Siti, is the hoodie still available?",
         sender_id=user_alya.id,
         receiver_id=user_siti.id,
     )
     
-    msg2 = Message(
-        content="Yes Alya, it's still available!",
+    msg2 = ChatMessage(
+        body="Yes Alya, it's still available!",
         sender_id=user_siti.id,
         receiver_id=user_alya.id,
     )
