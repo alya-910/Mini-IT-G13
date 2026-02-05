@@ -1,3 +1,5 @@
+<!-- all codes on this page belongs to siti other than some minor adjustments by alya -->
+
 {% extends 'base.html' %}
 
 <head>
@@ -35,7 +37,7 @@
   <button type="submit" class="btn primary">Add to Cart</button>
 </form><br>
         {% if item.status == 'active' %}
-                <a href="{{ url_for('reports.report_listing', listing_id=item.id) }}" class="btn danger">Report listing</a>
+                <a href="{{ url_for('reports.report_listing', listing_id=item.id) }}" class="btn danger">⚠︎ Report listing</a>
             {% else %}
                 (suspended)
             {% endif %}

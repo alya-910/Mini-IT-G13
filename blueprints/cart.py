@@ -1,3 +1,5 @@
+# all codes on this page belongs to siti other than some minor adjustments by alya
+
 from datetime import datetime
 from flask import Blueprint, redirect, url_for, render_template, session
 from models.items import Item

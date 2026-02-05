@@ -1,3 +1,5 @@
+<!-- all codes on this page belongs to siti other than some minor adjustments by alya -->
+
 <link rel="stylesheet" href="{{ url_for('static', filename='css/cart.css') }}">
 
 <div class="container">
@@ -11,16 +13,32 @@
     <tr>
       <th>Item</th>
       <th>Price</th>
+      <th>Seller</th>
       <th>Action</th>
+      <th>Report</th>
     </tr>
 
     {% for item, qty in items %}
     <tr>
-      <td>{{ item.title }}</td>
+      <td>
+        <a href="{{ url_for('item.item_detail', item_id=item.id) }}">
+        {{ item.title }}
+        </a>
+      </td>
       <td>RM {{ '%.2f'|format(item.price) }}</td>
+      <td>
+        <a href="{{ url_for('user.profile', user_id=item.seller_id) }}">
+          {{ item.seller.username }}
+        </a>
+      </td>
       <td>
         <a class="remove-link" href="{{ url_for('cart.remove_from_cart', item_id=item.id) }}">
           Remove
+        </a>
+      </td>
+      <td>
+        <a href="{{ url_for('reports.report_listing', listing_id=item.id) }}">
+          Report listing
         </a>
       </td>
     </tr>
