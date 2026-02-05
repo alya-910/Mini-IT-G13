@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from flask_login import login_required, current_user
 from extensions import db
-from models.listing import Listing
+from models.items import Item
 from models.report import Report
 
 reports_bp = Blueprint('reports', __name__)
@@ -10,7 +10,7 @@ reports_bp = Blueprint('reports', __name__)
 @reports_bp.route('/report/listing/<int:listing_id>', methods=['GET', 'POST'])
 @login_required
 def report_listing(listing_id):
-    listing = Listing.query.get_or_404(listing_id)
+    listing = Item.query.get_or_404(listing_id)
     
     if request.method == 'POST':
         reason = request.form.get('reason')
