@@ -9,8 +9,8 @@ class Report(db.Model):
     
     reporter_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     reported_user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
-    listing_id = db.Column(db.Integer, db.ForeignKey('listing.id'), nullable=True)
+    listing_id = db.Column(db.Integer, db.ForeignKey('item.id'), nullable=True)
 
     reporter = db.relationship('User', foreign_keys=[reporter_id], backref='reports_made')
     reported_user = db.relationship('User', foreign_keys=[reported_user_id], backref='reports_received')
-    listing = db.relationship('Listing', backref='reports')
+    listing = db.relationship('Item', backref='reports')
