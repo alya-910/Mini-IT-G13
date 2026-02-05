@@ -7,12 +7,15 @@ body{
     position: relative;
     font-family: Arial, sans-serif;
     background-color: #ffffff;
+    display: flex;
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    height: 100vh;
+    flex-direction: column;
 }
 
 .container-a{
@@ -26,6 +29,7 @@ body{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     padding-left: 15px;
     padding-right: 15px;
+    flex-shrink: 0;
     position: relative;
     overflow: visible;
 }
@@ -41,7 +45,7 @@ body{
 }
 
 .logo a{
-    font-size: 35px;
+    font-size: 30px;
     font-weight: 600;
     color: black;
 }

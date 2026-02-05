@@ -148,3 +148,32 @@ img{
   background-color: rgb(226, 47, 47);
   transform: translateY(-2px);
 }
+/* settings for user profile */
+.user-wrapper {
+    display: flex;
+    align-items: center;
+    border-radius: 25px;
+    background-color: rgb(241, 186, 209);
+    padding: 20px;
+    gap: 20px;
+    text-align: left;
+    margin: 0 0 20px 0;
+}
+
+.list-pfp {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    margin-left: 0;
+}
+
+.list-data {
+    text-align: left;
+}
+
+.users-container {
+    width: 100%;
+    text-align: left;
+}

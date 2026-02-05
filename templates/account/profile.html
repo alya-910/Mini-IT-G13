@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<div class="wrapper">
+    <div class="user_data">
+        <strong>User ID: </strong>{{ user.id }}<br>
+        <strong>Username: </strong>{{ user.username }}<br>
+        <strong>Email: </strong>{{ user.email }}<br>
+        <strong>Bio: </strong>{{ user.bio or "No bio yet."}}<br>
+
+        <!-- changing profile picture -->
+        {% if user.profile_pic %}
+            <img src="{{ url_for('static', filename='profile_pics/' + user.profile_pic, t=time_now) }}" class="pfp">
+        {% else %}
+            <img src="{{ url_for('static', filename='profile_pics/default.jpg', t=time_now) }}">
+        {% endif %}
+
+        <!-- Add messaging feature -->
+        {% if user != current_user %}
+            <a href="{{ url_for('messages.chat', user_id=user.id) }}">Message</a>
+        {% endif %}
+
+        <!-- Add link to dashboard so user can edit their profile -->
+        {% if current_user.is_authenticated and current_user.id == user.id %}
+            <a href="{{ url_for('account.dashboard') }}">Edit profile</a>
+        {% endif %}
+
+    </div>
+</div>
+
+{% endblock %}

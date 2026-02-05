@@ -36,13 +36,19 @@ def create_app():
     # 4. Register Blueprints
     # app.register_blueprint(auth_bp)
     app.register_blueprint(admin_users_bp)
-    app.register_blueprint(admin_listings_bp)
+    app.register_blueprint(admin_listings_bp)    from routes.messages import messages
+    from routes.notifications import notifications
+    from routes.users import users
+
     app.register_blueprint(reports_bp)
 
     # alya's code
     app.register_blueprint(auth, url_prefix="/auth")
     app.register_blueprint(account, url_prefix="/account")
     app.register_blueprint(main)
+    app.register_blueprint(messages)
+    app.register_blueprint(notifications)
+    app.register_blueprint(users)
 
     # siti's code
     app.register_blueprint(item)
