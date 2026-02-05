@@ -4,10 +4,10 @@
 <body class="confirm_delete">
     <div class="choice" id="confirm_delete">
 
-        <h2>Are you sure you want to delete your account?</h2>
+        <h2>Are you sure you want to delete your account?</h2><br>
         <p>
             This action is permanent and irreversible.
-        </p>
+        </p><br>
 
         <form method="POST" action="{{ url_for('account.delete_account') }}">
             <button type="submit" name="choice" value="yes" class="submit-btn">

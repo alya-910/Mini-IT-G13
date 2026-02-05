@@ -32,20 +32,14 @@
     font-size: 15px;
 }
 
-.user_data{
-    background: rgb(188, 216, 182);
-    width: 90%;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}
-
+/* dashboard controls */
 .update_info {
     background: rgb(226, 225, 225);
-    width: 90%;
-    padding: 30px;
-    border-radius: 10px;
+    border-radius: 15px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    padding: 30px;
+    flex: 1;
+    flex-shrink: 1;
 }
 
 img{
@@ -54,6 +48,24 @@ img{
     border-radius: 50%;
     display: block;
     margin-left: auto;
+}
+
+input[name="username"]{
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.add-bio {
+    flex-grow: 1;
+    height: 100px;
+    width: 40%;
+    padding: 10px 15px;
+    margin-top: 10px;
+    border-radius: 5px;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    resize: none;
 }
 
 /* settings for user profile */
@@ -153,7 +165,7 @@ img{
     display: flex;
     align-items: center;
     border-radius: 25px;
-    background-color: rgb(241, 186, 209);
+    background-color: rgb(188, 216, 182);
     padding: 20px;
     gap: 20px;
     text-align: left;
@@ -176,4 +188,49 @@ img{
 .users-container {
     width: 100%;
     text-align: left;
+}
+
+/* profile page  */
+.profile-wrapper {
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    display: block;
+    gap: 20px;
+}
+
+.top-row {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 20px;
+}
+
+.profile-pfp {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    border: 5px;
+    border-style: solid;
+    border-color: #f4f4f4;
+}
+
+.equal-height {
+    display: flex;
+    gap: 20px;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.user_data, .profile-bio{
+    background: rgb(188, 216, 182);
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    padding: 30px;
+    flex: 1;
+    flex-shrink: 1;
 }

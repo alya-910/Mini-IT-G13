@@ -7,19 +7,24 @@ body{
     position: relative;
     font-family: Arial, sans-serif;
     background-color: #ffffff;
-    display: flex;
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    height: 100vh;
-    flex-direction: column;
 }
 
 .container-a{
     margin: 20px;
+}
+
+hr {
+    border: 0;
+    height: 3px;
+    background-color: #b4afa0;
+    border-radius: 2px;
+    margin: 20px auto;
 }
 
 /* navigatino bar */
@@ -27,11 +32,18 @@ body{
 .navbar{
     background-color: pink;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    padding-top: 10px;
+    padding-bottom: 10px;
     padding-left: 15px;
     padding-right: 15px;
     flex-shrink: 0;
     position: relative;
     overflow: visible;
+    height: 65px;
+}
+
+.navbar a {
+    padding: 5px 15px;
 }
 
 .navbar a:hover{
@@ -106,8 +118,7 @@ ul li:hover ul.dropdown {
 /* end of nav */
 
 .wrapper {
-    width: 100%;
-    max-width: 800px;
+    max-width: 80%;
     margin-left: auto;
     margin-right: auto;
     padding: 20px;

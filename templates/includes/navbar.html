@@ -3,13 +3,27 @@
         <div class="logo nav-left"><a href="{{ url_for('main.index') }}">t h r i f t w i z e</a></div>
         <div class="nav-right">
         <li><a href="{{ url_for('main.index') }}">Home</a></li>
+
+        {% if current_user.is_authenticated %}
+        <li>
+            <a>Activity ▼</a>
+            <ul class="dropdown">
+                <li><a href="{{ url_for('notifications.list_notifications') }}">Inbox</a></li>
+            </ul>
+        </li>
+        {% endif %}
+
         <li>
             <a>Account ▼</a>
             <ul class="dropdown">
                 <li><a href="{{ url_for('account.dashboard') }}">Dashboard</a></li>
-                <li><a href="#">Undecided</a></li>
+                {% if current_user.is_authenticated %}
+                    <li><a href="{{ url_for('user.profile', user_id=current_user.id) }}">Profile</a></li>
+                {% endif %}
+                <li><a href="{{ url_for('user.user_list') }}">Users</a></li>
             </ul>
         </li>
+
         {% if current_user.role == 'admin' %}
         <li>
             <a>Admin ▼</a>

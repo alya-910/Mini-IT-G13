@@ -4,7 +4,7 @@ from werkzeug.utils import secure_filename
 from extensions import db
 from models.items import Item
 from flask import current_app
-from flask_login import login_required
+from flask_login import login_required, current_user
 
 item = Blueprint('item', __name__)
 
@@ -17,6 +17,7 @@ def upload_item():
         description = request.form.get("description")
         price = float(request.form.get("price") or 0)
         trade_option = request.form.get("trade_option") or "No"
+        seller_id = current_user.id
 
         image_file = request.files.get("image")
         filename = None
@@ -31,7 +32,8 @@ def upload_item():
             description=description,
             price=price,
             trade_option=trade_option,
-            image_path=f"uploads/{filename}" if filename else None
+            image_path=f"uploads/{filename}" if filename else None,
+            seller_id=seller_id
         )
         db.session.add(new_item)
         db.session.commit()

@@ -7,21 +7,30 @@
     <h3>You are logged in!</h3>
     <br>
 
-    <div class="user_data">
-        <strong>User ID: </strong>{{ user.id }}<br>
-        <strong>Username: </strong>{{ user.username }}<br>
-        <strong>Email: </strong>{{ user.email }}<br>
-        <strong>Bio: </strong>{{ user.bio or "No bio yet."}}<br>
-
+    <div class="top-row">
         <!-- changing profile picture -->
         {% if user.profile_pic %}
-            <img src="{{ url_for('static', filename='profile_pics/' + user.profile_pic, t=time_now) }}" class="pfp">
+            <img src="{{ url_for('static', filename='profile_pics/' + user.profile_pic, t=time_now) }}" class="profile-pfp">
         {% else %}
-            <img src="{{ url_for('static', filename='profile_pics/default.jpg', t=time_now) }}">
+            <img src="{{ url_for('static', filename='profile_pics/default.jpg', t=time_now) }}" class="profile-pfp">
         {% endif %}
 
-        <p><a href="{{ url_for('user.user_list', user_id=user.id) }}">View users</a></p>
+        <div class="equal-height">
+            <div class="user_data">
+                <strong>User ID: </strong>{{ user.id }}<br>
+                <strong>Username: </strong>{{ user.username }}<br>
+                <strong>Email: </strong>{{ user.email }}<br><br>
 
+                <p><a href="{{ url_for('user.user_list', user_id=user.id) }}">View users</a></p>
+
+            </div>
+
+            <div class="profile-bio">
+                <h3>About me</h3><br>
+                {{ user.bio or "No bio yet."}}<br>
+            </div>
+            
+        </div>
     </div>
     <br><br>
 
@@ -33,15 +42,15 @@
         <!-- use a form to edit user details -->
         <form method="POST" enctype="multipart/form-data" action="{{ url_for('account.update_profile') }}">
             <label>Change username</label>
-            <input name="username" value="{{ user.username }}">
+            <input name="username">
             <br><br>
 
             <label>Profile picture</label>
             <input type="file" name="profile_pic">
             <br><br>
 
-            <label>Bio</label>
-            <textarea name="bio">{{ user.bio }}</textarea>
+            <label>Bio: </label><br>
+            <textarea name="bio" class="add-bio"></textarea>
             <br><br>
 
             <div class="center-btn">

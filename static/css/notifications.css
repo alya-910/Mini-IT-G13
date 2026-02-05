@@ -1,0 +1,32 @@
+ul.notification-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background: none;
+}
+
+.notification-list li{
+    border: none;
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.notification-list a {
+    text-decoration: none;
+    outline: none;
+    color: brown;
+
+}
+
+.notification-list a:hover {
+    background-color: #c8ddc7;
+    border-radius: 10px;
+
+}
+
+.notification-list li:hover {
+    cursor: pointer;
+    text-decoration: none !important;
+    border-radius: 10px;
+}

@@ -28,7 +28,7 @@ def report_listing(listing_id):
         db.session.commit()
         
         flash('Report submitted successfully.', 'success')
-        return redirect(url_for('view_listings'))
+        return redirect(url_for('main.index'))
     
     return render_template('report_form.html', listing=listing)
 

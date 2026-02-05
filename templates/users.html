@@ -4,25 +4,26 @@
 
 <div class="container">
     <div class="wrapper">
-        <h2>Users: </h2>
+        <h2>Users: </h2><br>
 
         {% for user in users %}
-        <div class="user-wrapper">
-            <img src="{{ url_for('static', filename='profile_pics/' + user.profile_pic) }}" class="list-pfp">
+            {% if user.email !='admin@gmail.com' %}
+            <div class="user-wrapper">
+                <img src="{{ url_for('static', filename='profile_pics/' + user.profile_pic) }}" class="list-pfp">
 
-            <div class="list-data">
-                <strong>Username: {{ user.username }}</strong><br><br>
+                <div class="list-data">
+                    <strong>Username: {{ user.username }}</strong><br><br>
 
-                <a href="{{ url_for('user.profile', user_id=user.id) }}">
-                    View Profile
-                </a><br><br>
+                    <a href="{{ url_for('user.profile', user_id=user.id) }}" class="submit-btn">
+                        View Profile
+                    </a><br><br>
 
-                <a href="{{ url_for('messages.chat', user_id=user.id) }}"
-                    class="btn btn-sm">
-                    Message
-                </a>
-            </div>    
-        </div>
+                    <a href="{{ url_for('messages.chat', user_id=user.id) }}"
+                        class="btn1">Message
+                    </a>
+                </div>    
+            </div>
+            {% endif %}
         {% endfor %}
     </div>
 </div>

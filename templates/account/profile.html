@@ -2,30 +2,68 @@
 
 {% block body %}
 
-<div class="wrapper">
-    <div class="user_data">
-        <strong>User ID: </strong>{{ user.id }}<br>
-        <strong>Username: </strong>{{ user.username }}<br>
-        <strong>Email: </strong>{{ user.email }}<br>
-        <strong>Bio: </strong>{{ user.bio or "No bio yet."}}<br>
-
+<div class="profile-wrapper">
+    <div class="top-row">
         <!-- changing profile picture -->
         {% if user.profile_pic %}
-            <img src="{{ url_for('static', filename='profile_pics/' + user.profile_pic, t=time_now) }}" class="pfp">
+            <img src="{{ url_for('static', filename='profile_pics/' + user.profile_pic, t=time_now) }}" class="profile-pfp">
         {% else %}
-            <img src="{{ url_for('static', filename='profile_pics/default.jpg', t=time_now) }}">
+            <img src="{{ url_for('static', filename='profile_pics/default.jpg', t=time_now) }}" class="profile-pfp">
         {% endif %}
+        <div class="equal-height">
+            <div class="user_data">
+                <h3>User details</h3><br>
+                <strong>Username: </strong>{{ user.username }}<br>
+                <strong>Email: </strong>{{ user.email }}<br><br>
 
-        <!-- Add messaging feature -->
-        {% if user != current_user %}
-            <a href="{{ url_for('messages.chat', user_id=user.id) }}">Message</a>
-        {% endif %}
+                <!-- Add messaging feature -->
+                {% if user != current_user %}
+                    <a href="{{ url_for('messages.chat', user_id=user.id) }}">Message user</a>
+                {% endif %}
 
-        <!-- Add link to dashboard so user can edit their profile -->
-        {% if current_user.is_authenticated and current_user.id == user.id %}
-            <a href="{{ url_for('account.dashboard') }}">Edit profile</a>
-        {% endif %}
+                <!-- Add link to dashboard so user can edit their profile -->
+                {% if current_user.is_authenticated and current_user.id == user.id %}
+                    <a href="{{ url_for('account.dashboard') }}">Edit profile</a>
+                {% endif %}
 
+            </div>
+
+            <div class="profile-bio">
+                <h3>About me</h3><br>
+                {{ user.bio or "No bio yet."}}<br>
+            </div>
+        </div>
+    </div>
+    <hr><br>
+
+    <div class="listings">
+        <h2>{{ user.username }}'s listings</h2><br>
+        <div class="item-grid">
+            {% for item in user.items %}
+                <div class="item-card">
+
+                <a href="{{ url_for('item.item_detail', item_id=item.id) }}" width="200">
+                    <img
+                    src="{{ url_for('static', filename=item.image_path) }}"
+                    alt="{{ item.title }}"
+                    >
+                </a>
+
+                <h3>
+                    <a href="{{ url_for('item.item_detail', item_id=item.id) }}">
+                    {{ item.title }}
+                    </a>
+                </h3>
+
+                <p class="price">RM {{ '%.2f'|format(item.price or 0) }}</p>
+
+                <p class="description">{{ item.description }}</p>
+
+                </div>
+            {% else %}
+                <p>This user has no listings yet.</p>
+            {% endfor %}
+        </div>
     </div>
 </div>
 

@@ -26,12 +26,21 @@
 
         <p class="price">RM {{ '%.2f'|format(item.price or 0) }}</p>
 
-        <p class="description">{{ item.description }}</p>
+        <p class="description">{{ item.description }}</p> <br>
+
+        <p>Sold by: <a href="{{ url_for('user.profile', user_id=item.seller_id) }}"> {{ item.seller.username }} </a>
+        </p> <br>
 
         <form action="{{ url_for('cart.add_to_cart', item_id=item.id) }}" method="get">
-  <button type="submit">Add to Cart</button>
-</form>
+  <button type="submit" class="btn primary">Add to Cart</button>
+</form><br>
+        {% if item.status == 'active' %}
+                <a href="{{ url_for('reports.report_listing', listing_id=item.id) }}" class="btn danger">Report listing</a>
+            {% else %}
+                (suspended)
+            {% endif %}
 
+        {% if current_user.id == item.seller_id %}
         <div class="button-row">
           <a href="{{ url_for('item.edit_item', item_id=item.id) }}" class="btn primary">
             Edit
@@ -44,6 +53,8 @@
             <button type="submit" class="btn danger">Delete</button>
           </form>
         </div>
+        {% endif %}
+
       </div>
 
     </div>

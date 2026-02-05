@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% block body %}
 
-<div class="container">
-    <h2>Notifications</h2>
+<div class="container-a">
+    <h2>Notifications</h2><br>
 
     {% if notifs %}
         <ul class="notification-list">
@@ -17,7 +17,7 @@
             {% endfor %}
         </ul>
     {% else %}
-        <p>No notifications.</p>
+        <p>No new notifications.</p>
     {% endif %}
 </div>
 
