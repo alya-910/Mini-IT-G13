@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, session
 from flask_login import login_required, current_user
 from models.items import Item
-from models.listing import Listing
+from models.items import Item
 from models.message_model import ChatMessage
 
 main = Blueprint('main', __name__)
@@ -15,7 +15,7 @@ def index():
 @main.route("/listings")
 @login_required
 def view_listings():
-    listings = Listing.query.all()
+    listings = Item.query.all()
     return render_template("listing_list.html", listings=listings)
 
 @main.route("/messages")
