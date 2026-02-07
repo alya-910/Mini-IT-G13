@@ -3,7 +3,9 @@
 {% block body %}
 
 <div class="wrapper-message">
-    <h2>Chat with {{ other_user.username }}</h2>
+    <div class="chat-header">
+        <h2><a href="{{ url_for('user.profile', user_id=other_user.id) }}">Chat with {{ other_user.username }}</a></h2>
+    </div>
 
     <div class="message-scroll-area" id="message-window">
         {% for msg in messages %}
@@ -14,7 +16,7 @@
                     {% if current_user.profile_pic %}
                         <img src="{{ url_for('static', filename='profile_pics/' + current_user.profile_pic, t=time_now) }}" class="outgoing-pfp">
                     {% else %}
-                        <img src="{{ url_for('static', filename='profile_pics/default.jpg', t=time_now) }}">
+                        <img src="{{ url_for('static', filename='profile_pics/default.jpg', t=time_now) }}" class="outgoing-pfp">
                     {% endif %}
                     
                 </div>
@@ -25,7 +27,7 @@
                     {% if other_user.profile_pic %}
                         <img src="{{ url_for('static', filename='profile_pics/' + other_user.profile_pic, t=time_now) }}" class="incoming-pfp">
                     {% else %}
-                        <img src="{{ url_for('static', filename='profile_pics/default.jpg', t=time_now) }}">
+                        <img src="{{ url_for('static', filename='profile_pics/default.jpg', t=time_now) }}" class="incoming-pfp">
                     {% endif %}
                     <p>{{ msg.body }}</p>
                     
@@ -36,17 +38,21 @@
 
         
     </div>
-    <form method="POST">
-        <textarea
-        name="text"
-        id="text"
-        class="message-bar"
-        placeholder="Send a message..." 
-        required
-        ></textarea>
 
-        <button type="submit" class="btn1">Send</button>
-    </form>
+    <div class="chat-footer">
+        <form method="POST">
+            <textarea
+            name="text"
+            id="text"
+            class="message-bar"
+            placeholder="Send a message..." 
+            required
+            ></textarea>
+
+            <button type="submit" class="btn1">Send</button>
+        </form>
+    </div>
+    
 </div>
 
 <script>

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block body %}
+
+<div class="container-a">
+    <div class="wrapper">
+        <h2>Your Conversations</h2>
+        <div class="chat-list">
+            {% for user in users %}
+                <a href="{{ url_for('messages.chat', user_id=user.id) }}" class="chat-link">
+                    <div class="chat-item">
+                        <img src="{{ url_for('static', filename='profile_pics/' + user.profile_pic) }}" class="list-pfp">
+
+                        <div class="list-data">
+                            <strong>Username: {{ user.username }}</strong><br><br>                            
+                        </div> 
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

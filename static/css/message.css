@@ -6,11 +6,11 @@
     padding: 10px;
     text-align: left;
     margin-bottom: 10px;
-    gap: 20px;
     margin-left: 10px;
     width: fit-content;
     max-width: 70%;
     margin-right: auto;
+    justify-content: flex-start;
 }
 
 .message-outgoing {
@@ -19,13 +19,13 @@
     border-radius: 30px;
     background-color: rgb(211, 247, 206);
     padding: 10px;
-    text-align: right;
+    text-align: left;
     margin-bottom: 10px;
-    gap: 20px;
     margin-right: 10px;
     width: fit-content;
     max-width: 70%;
     margin-left: auto;
+    justify-content: flex-start;
 }
 
 .outgoing-pfp {
@@ -59,6 +59,7 @@
 .wrapper-message {
     display: flex;
     flex-direction: column;
+    height: 90vh;
     flex-grow: 1;
     overflow: hidden;
     width: 60%;
@@ -67,6 +68,18 @@
     background: #ffffff;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     flex-grow: 1;
+}
+
+.chat-header {
+    background-color: #f5f5f0;
+    padding: 5px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.chat-header a {
+    text-decoration: none;
+    color: inherit;
 }
 
 .wrapper-message h2 {
@@ -78,6 +91,8 @@
 .message-scroll-area {
     flex-grow: 1;
     overflow-y: auto;
+    padding: 20px;
+    background-color: white;
 }
 
 .wrapper-message form {
@@ -105,4 +120,35 @@
     padding: 10px;
     border-radius: 15px;
     margin: 5px 0;
+}
+
+/* conersations page */
+.chat-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.chat-item {
+    display: flex;
+    padding: 15px;
+    background: rgb(188, 216, 182);
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #333;
+    transition: background 0.2s;
+    align-items: center;
+    text-align: left;
+    gap: 20px;
+}
+
+.chat-item:hover {
+    background: rgb(162, 185, 157);
+}
+
+.chat-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
 }

@@ -49,3 +49,23 @@ def chat(user_id):
     ).order_by(ChatMessage.timestamp.asc()).all()
 
     return render_template('messages/chat.html', messages=messages ,other_user=other_user)
+
+# chats page
+@messages.route('/chats')
+@login_required
+def chats():
+    msgs = ChatMessage.query.filter(
+        (ChatMessage.sender_id == current_user.id) | 
+        (ChatMessage.receiver_id == current_user.id)
+    ).order_by(ChatMessage.timestamp.desc()).all()
+
+    user_ids = set()
+
+    for msg in msgs:
+        if msg.sender_id != current_user.id:
+            user_ids.add(msg.sender_id)
+        if msg.receiver_id != current_user.id:
+            user_ids.add(msg.receiver_id)
+
+    users = User.query.filter(User.id.in_(user_ids)).all()
+    return render_template('messages/conversations.html', users=users)
