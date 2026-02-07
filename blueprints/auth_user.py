@@ -15,16 +15,21 @@ def register():
         email = request.form['email']
         password = request.form["password"]
 
+        # check if password is long enough
+        if len(password) < 6:
+            flash("Password needs to be at least 6 characters", 'error')
+            return redirect(url_for('auth_user.register'))
+
         # check if email is already in use
         existing_email = User.query.filter_by(email=email).first()
         if existing_email:
-            flash("Email already in use")
+            flash("Email already in use",'error')
             return redirect(url_for('auth_user.register'))
         
         #check if username is taken
         existing_username = User.query.filter_by(username=username).first()
         if existing_username:
-            flash("Username is taken")
+            flash("Username is taken", 'error')
             return redirect(url_for('auth_user.register'))
         
         # add new user
@@ -34,11 +39,10 @@ def register():
         db.session.commit()
 
         session['username'] = username
-        flash("Account created successfully!")
+        flash("Account created successfully!", 'success')
         return redirect(url_for('main.index'))
     
     return render_template('authentication/register.html')
-
 
 
 # User log in route
@@ -48,26 +52,34 @@ def login():
         email = request.form['email']
         password = request.form["password"]
         user = User.query.filter_by(email=email).first()
-        
+
+        # check if email matches
+        if not user:
+            flash("Invalid email", 'error')
+            return redirect(url_for('auth_user.login'))
+
+        # check if password matches
+        if not user.check_password(password):
+            flash("Invalid password", 'error')
+            return redirect(url_for('auth_user.login'))
+
         if user and user.check_password(password):
             login_user(user)
             session['username'] = user.username
             session['user_id'] = user.id
             return redirect(url_for('main.index'))
-        
-        flash("Invalid email or password")
-        return redirect(url_for('auth_user.login'))
 
     return render_template('authentication/login.html')
+
 
 # user log out
 @auth.route('/logout')
 def logout():
     session.clear()
-    flash("You have been logged out.")
+    flash("You have been logged out.", 'success')
     return redirect(url_for('main.index'))
 
-# forgot password
+# send mail for forgot password
 def send_mail(user):
     token = user.get_reset_token()
     msg = Message('Password reset request', recipients=[user.email])
@@ -80,6 +92,7 @@ def send_mail(user):
     '''
     mail.send(msg)
 
+# send email to request password reset
 @auth.route('/forgot_password', methods=['GET', 'POST'])
 def forgot_password():
     if request.method == 'POST':
@@ -88,38 +101,41 @@ def forgot_password():
 
         if user:
             send_mail(user)
-            flash("Reset request sent. Check your email.")
+            flash("Reset request sent. Check your email.", 'success')
             return redirect(url_for('auth_user.login'))
         
         else:
-            flash("Invalid email. Please re-enter your email.")
+            flash("Invalid email. Please re-enter your email.", 'error')
 
     return render_template('authentication/forgot_password.html')
+
 
 @auth.route('/reset_password/<token>', methods=['GET', 'POST'])
 def reset_token(token):
     user=User.verify_reset_token(token)
 
     if user is None:
-        flash('The link is invalid or expired. Please retry')
+        flash('The link is invalid or expired. Please retry', 'error')
         return redirect(url_for('auth_user.forgot_password'))
     
     if request.method == "POST":
         new_pw = request.form.get("new_password")
         confirm_pw = request.form.get("confirm_password")
 
+        # check if password is long enough
         if len(new_pw) < 6:
-            flash("Password needs to be at least 6 characters")
+            flash("Password needs to be at least 6 characters", 'error')
             return redirect(url_for('auth_user.reset_password'))
         
+        # check if user entered the same password 
         if new_pw != confirm_pw:
-            flash("New password and confirmation password do not match")
+            flash("New password and confirmation password do not match", 'error')
             return redirect(url_for('auth_user.reset_password'))
 
         user.set_password(new_pw)
         db.session.commit()
         
-        flash("Password reset successfully. Please login.")
+        flash("Password reset successfully. Please login.", 'success')
         return redirect(url_for('auth_user.login'))
     
     return render_template('authentication/reset_password.html', token=token)

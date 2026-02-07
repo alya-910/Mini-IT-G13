@@ -1,7 +1,7 @@
 # all codes on this page belongs to siti other than some minor adjustments by alya
 
 from datetime import datetime
-from flask import Blueprint, redirect, url_for, render_template, session
+from flask import Blueprint, redirect, url_for, render_template, session, flash
 from models.items import Item
 from flask_login import login_required
 
@@ -17,6 +17,11 @@ def add_to_cart(item_id):
     # Only add if not already in wishlist
     if item_id_str not in cart:
         cart[item_id_str] = 1
+        session["cart"] = cart
+        flash("Item added to your wishlist!", "success")
+
+    else: 
+        flash("This item is already in your wishlist.", "info")
 
     session["cart"] = cart
     return redirect(url_for("item.item_detail", item_id=item_id))

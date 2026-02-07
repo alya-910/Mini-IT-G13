@@ -1,7 +1,7 @@
 # all codes on this page belongs to siti other than some minor adjustments by alya
 
 import os
-from flask import Blueprint, request, redirect, url_for, render_template, session
+from flask import Blueprint, request, redirect, url_for, render_template, session, flash
 from werkzeug.utils import secure_filename
 from extensions import db
 from models.items import Item
@@ -72,6 +72,7 @@ def edit_item(item_id):
             item.image_path = f"uploads/{filename}"
 
         db.session.commit()
+        flash("Listing updated", 'success')
         return redirect(url_for("item.item_detail", item_id=item.id))
 
     return render_template("edit_item.html", item=item)
@@ -90,4 +91,5 @@ def delete_item(item_id):
             pass
     db.session.delete(item)
     db.session.commit()
+    flash("Listing deleted", 'success')
     return redirect(url_for("main.index"))

@@ -15,6 +15,18 @@ body{
     box-sizing: border-box;
 }
 
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #416039;
+  background-color: #eae8e0;
+  background-size: auto;
+  padding: 10px 20px;
+  border-radius: 5px;
+  display: inline-block;
+}
+
 .container-a{
     margin: 20px;
 }
@@ -133,4 +145,38 @@ ul li:hover ul.dropdown {
     border-radius: 10px;
     padding: 10px;
     width: 90px;
+}
+
+/* flashing message */
+#flash-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.flash-message {
+    padding: 15px 25px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    color: white;
+    background-color: rgb(105, 105, 105);
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    
+    animation: slideIn 0.5s ease-out, fadeOut 0.5s ease-in 4.5s forwards;
+}
+
+.success { background-color: #72c795; }
+.error { background-color: #e06e62; }
+.info { background-color: #b4afa0; }
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; visibility: hidden; }
 }
