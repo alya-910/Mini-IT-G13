@@ -114,7 +114,7 @@ def pwd_change_mail(user):
 
         If you did not request this, please click the link below to reset your password:
 
-        {url_for('auth.forgot_password', _external=True)}
+        {url_for('auth_user.forgot_password', _external=True)}
 
         If this wasn’t you, please secure your account immediately.
 

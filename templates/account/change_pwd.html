@@ -5,14 +5,6 @@
 <div class="container" id="authentication">
     <h1>Change Password</h1>
 
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            {% for msg in messages %}
-            <div style="color: rgb(0, 0, 0);">{{ msg }}</div>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
-
     <form method="POST" action="{{ url_for('account.change_password') }}">
         <label>Enter your current password:</label>
         <input

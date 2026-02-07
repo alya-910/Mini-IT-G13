@@ -68,36 +68,6 @@ input[name="username"]{
     resize: none;
 }
 
-/* settings for user profile */
-.user-wrapper {
-    display: flex;
-    align-items: center;
-    border-radius: 25px;
-    background-color: rgb(241, 186, 209);
-    padding: 20px;
-    gap: 20px;
-    text-align: left;
-    margin: 0 0 20px 0;
-}
-
-.list-pfp {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    object-fit: cover;
-    flex-shrink: 0;
-    margin-left: 0;
-}
-
-.list-data {
-    text-align: left;
-}
-
-.users-container {
-    width: 100%;
-    text-align: left;
-}
-
 .btn1 {
     padding: 10px 18px;
     background-color: rgb(231, 143, 158);
@@ -160,6 +130,7 @@ input[name="username"]{
   background-color: rgb(226, 47, 47);
   transform: translateY(-2px);
 }
+
 /* settings for user profile */
 .user-wrapper {
     display: flex;
@@ -227,7 +198,16 @@ input[name="username"]{
 }
 
 .user_data, .profile-bio{
-    background: rgb(188, 216, 182);
+    background: rgb(192, 211, 187);
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    padding: 30px;
+    flex: 1;
+    flex-shrink: 1;
+}
+
+.profile-bio {
+    background: rgb(250, 196, 205);
     border-radius: 15px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     padding: 30px;

@@ -13,7 +13,6 @@ class User(db.Model, UserMixin):
     bio = db.Column(db.Text, default="")
     profile_pic = db.Column(db.String(200), default="default.jpg")
 
-    name = db.Column(db.String(150))
     role = db.Column(db.String(50), default='user')
     status = db.Column(db.String(50), default='active')
 

@@ -21,7 +21,7 @@ def report_listing(listing_id):
             details=details,
             reporter_id=current_user.id,
             listing_id=listing.id,
-            reported_user_id=listing.user_id
+            reported_user_id=listing.seller_id
         )
         
         db.session.add(new_report)
@@ -38,7 +38,7 @@ def report_listing(listing_id):
 def admin_reports():
     if current_user.role != 'admin':
         flash('Access denied. Admins only.', 'danger')
-        return redirect(url_for('index'))
+        return redirect(url_for('main.index'))
 
     # ✅ FIXED: Removed 'admin/' path. Now it looks in the main templates folder.
     reports = Report.query.order_by(Report.timestamp.desc()).all()
@@ -51,7 +51,7 @@ def admin_reports():
 def delete_report(report_id):
     if current_user.role != 'admin':
         flash('Access denied.', 'danger')
-        return redirect(url_for('index'))
+        return redirect(url_for('main.index'))
         
     report = Report.query.get_or_404(report_id)
     db.session.delete(report)
