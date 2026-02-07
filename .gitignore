@@ -1,6 +1,5 @@
 __pycache__/
 *.pyc
-instance/
 
 # User uploads
 static/profile_pics/*
@@ -10,11 +9,7 @@ venv/
 __pycache__/
 *.pyc
 
-# Databases
-*.db
 
-# Uploads
-static/uploads/
 
 # macOS
 .DS_Store
